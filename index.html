@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediCare Hospital — AI-Powered Healthcare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="navbar-auth.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Medi<span>Care</span></div>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#departments">Departments</a></li>
+      <li><a href="#doctors">Doctors</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href=" patient-login.html" class="btn btn-outline">Patient Login</a>
+      <a href="doctor-login.html" class="btn btn-blue">Doctor Login</a>
+    </div>
+  </nav>
+
+  <!-- EMERGENCY STRIP -->
+  <div class="emergency-strip">
+    <div class="pulse-dot"></div>
+    <span>24x7 Emergency Helpline --</span>
+    
+  <a href="tel:108"><strong>108</strong></a> |
+  <a href="tel:+917552700108"><strong>+91-755-2700-108</strong></a>
+
+
+    <span>-- Ambulance response under 8 minutes</span>
+  </div>
+  
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="ai-badge">
+        <div class="ai-badge-dot"></div>
+        Powered by AI · Real-time Alerts
+      </div>
+      <h1>Advanced Care,<br/><span>AI-Powered</span><br/>Diagnosis</h1>
+      <p>Our intelligent system captures your symptoms, predicts the disease, and alerts the hospital before you even arrive. Doctors are prepared. Every second counts.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-blue btn-lg">Send Symptoms Now</a>
+        <a href="#" id="dashboardHero" class="btn btn-outline btn-lg">View Dashboard</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-title">Live System Status</div>
+        <div class="stat-row">
+          <div class="stat-icon blue">🧠</div>
+          <div>
+            <div class="stat-label">AI Engine</div>
+            <div class="stat-value" style="color:#16a34a">Online · 98.4% accuracy</div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-icon green">📡</div>
+          <div>
+            <div class="stat-label">Patients monitored today</div>
+            <div class="stat-value">247 patients</div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-icon red">🚨</div>
+          <div>
+            <div class="stat-label">Emergency alerts sent</div>
+            <div class="stat-value">12 alerts today</div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-icon amber">⚡</div>
+          <div>
+            <div class="stat-label">Avg. API response time</div>
+            <div class="stat-value">1.2 seconds</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK ACTIONS -->
+  <div class="quick-actions">
+    <a class="qa-item" href="#"><div class="qa-icon">🩺</div><div><div class="qa-text-title">Send Symptoms</div><div class="qa-text-sub">AI pre-diagnosis in seconds</div></div></a>
+    <a class="qa-item" href="#"><div class="qa-icon">📍</div><div><div class="qa-text-title">Track Patient</div><div class="qa-text-sub">Live GPS location sharing</div></div></a>
+<a class="qa-item" id="dashboardQA" href="#">
+  <div class="qa-icon">🏥</div>
+  <div>
+    <div class="qa-text-title">Hospital Dashboard</div>
+    <div class="qa-text-sub">Real-time patient data</div>
+  </div>
+</a>    
+<a class="qa-item" href="#"><div class="qa-icon">🚨</div><div><div class="qa-text-title">Emergency</div><div class="qa-text-sub">Call 108 · instant alert</div></div></a>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-section" id="how">
+    <div style="text-align:center">
+      <div class="section-tag">How it works</div>
+      <div class="section-title">From symptoms to hospital in seconds</div>
+      <div class="section-sub" style="margin:0 auto 48px">Our AI pipeline captures patient data, predicts the disease, and delivers a real-time alert to the hospital dashboard.</div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Patient sends symptoms</h3>
+        <p>Patient fills symptom form on mobile or web. GPS location is captured automatically.</p>
+        <span class="step-tag" style="background:#eff6ff;color:#2563eb">Patient App · Web Form</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>AI predicts disease</h3>
+        <p>Flask API sends data to the ML model. Disease name, doctor type, and severity predicted in under 2 seconds.</p>
+        <span class="step-tag" style="background:#f5f3ff;color:#7c3aed">AI Engine · Flask API</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Hospital gets alert</h3>
+        <p>Dashboard receives real-time notification. Family gets Telegram message. Doctor is ready on arrival.</p>
+        <span class="step-tag" style="background:#f0fdf4;color:#16a34a">Dashboard · Telegram Bot</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPARTMENTS -->
+  <section class="section dept-section" id="departments">
+    <div class="section-tag">Departments</div>
+    <div class="section-title">Specialist care for every condition</div>
+    <div class="section-sub">Our AI engine recommends the right specialist based on your symptoms automatically.</div>
+    <div class="dept-grid">
+      <div class="dept-card"><span class="dept-icon">❤️</span><div class="dept-name">Cardiology</div><div class="dept-count">8 specialists</div></div>
+      <div class="dept-card"><span class="dept-icon">🧠</span><div class="dept-name">Neurology</div><div class="dept-count">5 specialists</div></div>
+      <div class="dept-card"><span class="dept-icon">🦴</span><div class="dept-name">Orthopaedic</div><div class="dept-count">6 specialists</div></div>
+      <div class="dept-card"><span class="dept-icon">🫁</span><div class="dept-name">Pulmonology</div><div class="dept-count">4 specialists</div></div>
+      <div class="dept-card"><span class="dept-icon">🩺</span><div class="dept-name">General OPD</div><div class="dept-count">12 doctors</div></div>
+      <div class="dept-card"><span class="dept-icon">👶</span><div class="dept-name">Paediatrics</div><div class="dept-count">5 specialists</div></div>
+      <div class="dept-card"><span class="dept-icon">🔬</span><div class="dept-name">Pathology</div><div class="dept-count">Lab 24x7</div></div>
+      <div class="dept-card"><span class="dept-icon">💊</span><div class="dept-name">Pharmacy</div><div class="dept-count">In-house 24x7</div></div>
+      <div class="dept-card"><span class="dept-icon">🩻</span><div class="dept-name">Radiology</div><div class="dept-count">MRI · CT · X-Ray</div></div>
+      <div class="dept-card"><span class="dept-icon">🚑</span><div class="dept-name">Emergency</div><div class="dept-count">Always open</div></div>
+     
+    </div>
+  </section>
+
+  <!-- DOCTORS -->
+  <section class="section doctors-section" id="doctors">
+    <div class="section-tag">Our Doctors</div>
+    <div class="section-title">Meet our specialists</div>
+    <div class="section-sub">AI recommends the right doctor — our team is always prepared with your pre-diagnosis data.</div>
+    <div class="doctors-grid">
+      <div class="doctor-card">
+        <div class="doctor-avatar">DS</div>
+        <div class="doctor-name">Dr. Deepak Sharma</div>
+        <div class="doctor-spec">Cardiologist</div>
+        <div class="doctor-exp">18 years experience</div>
+        <span class="available-badge available">Available</span>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">PR</div>
+        <div class="doctor-name">Dr. Priya Rao</div>
+        <div class="doctor-spec">Neurologist</div>
+        <div class="doctor-exp">14 years experience</div>
+        <span class="available-badge available">Available</span>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar" style="background:linear-gradient(135deg,#0d9488,#2dd4bf)">AK</div>
+        <div class="doctor-name">Dr. Amit Kumar</div>
+        <div class="doctor-spec">Orthopaedic</div>
+        <div class="doctor-exp">11 years experience</div>
+        <span class="available-badge busy">In surgery</span>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-avatar" style="background:linear-gradient(135deg,#dc2626,#f87171)">SM</div>
+        <div class="doctor-name">Dr. Sunita Mehta</div>
+        <div class="doctor-spec">General Physician</div>
+        <div class="doctor-exp">9 years experience</div>
+        <span class="available-badge available">Available</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-number">50,000+</div><div class="stat-divider"></div><div class="stat-name">Patients served</div></div>
+      <div class="stat-item"><div class="stat-number">120+</div><div class="stat-divider"></div><div class="stat-name">Expert doctors</div></div>
+      <div class="stat-item"><div class="stat-number">98.4%</div><div class="stat-divider"></div><div class="stat-name">AI accuracy</div></div>
+      <div class="stat-item"><div class="stat-number">2s</div><div class="stat-divider"></div><div class="stat-name">Alert response time</div></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Medi<span>Care</span></div>
+        <div class="footer-desc">AI-powered hospital notification system delivering real-time patient pre-diagnosis data and live location to doctors before arrival.</div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick links</div>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#departments">Departments</a></li>
+          <li><a href="#doctors">Doctors</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <ul class="footer-links">
+          <li><a href="#">AI Diagnosis</a></li>
+          <li><a href="#">Live Tracking</a></li>
+          <li><a href="#">Emergency Alert</a></li>
+          <li><a href="#">Telegram Alerts</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">Bhopal, Madhya Pradesh</a></li>
+          <li><a href="#">+91-755-2700-108</a></li>
+          <li><a href="#">info@medicare.in</a></li>
+          <li><a href="#">Emergency: 108</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">2025 MediCare Hospital. All rights reserved.</div>
+      <div class="footer-socials">
+        <a class="social-btn" href="https://www.facebook.com/" target="_blank">F</a>
+<a class="social-btn" href="https://www.instagram.com/" target="_blank">Ins</a>
+<a class="social-btn" href="https://x.com/" target="_blank">X</a>
+<a class="social-btn" href="https://www.youtube.com/" target="_blank">yt</a>
+    </div>
+  </footer>
+  <!-- Patient login-->
+
+  
+<script src="script.js"></script>
+ <script src="auth.js"></script>
+<script>
+  Auth.updateNavbar(); // navbar check karo page load pe
+</script>
+</body>
+</html>

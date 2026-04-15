@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Login — MediCare Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="doctor-login.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo">Medi<span>Care</span></a>
+    <div class="nav-center">
+      <span class="nav-tag">Doctor Portal</span>
+    </div>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </nav>
+
+  <!-- EMERGENCY STRIP -->
+  <div class="emergency-strip">
+    <div class="pulse-dot"></div>
+    <span>24x7 Emergency —</span>
+    <strong>108 | +91-755-2700-108</strong>
+    <span>— Hospital Control Room</span>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="page-wrapper">
+
+    <!-- LEFT PANEL — FORM -->
+    <div class="left-panel">
+      <div class="form-card">
+
+        <div class="form-header">
+          <div class="doctor-icon">🩺</div>
+          <div class="form-logo">Medi<span>Care</span></div>
+          <h2>Doctor Login</h2>
+          <p>Access your dashboard · view patient alerts · AI predictions</p>
+        </div>
+
+        <!-- TAB SWITCHER -->
+        <div class="tab-switcher">
+          <button class="tab active" id="tab-login" onclick="switchTab('login')">Login</button>
+          <button class="tab" id="tab-forgot" onclick="switchTab('forgot')">Forgot Password</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="login-form" onsubmit="handleLogin(event)">
+
+          <div class="form-group">
+            <label>Doctor ID / Employee Code</label>
+            <div class="input-wrap">
+              <span class="input-icon">🪪</span>
+              <input type="text" id="doctor-id" placeholder="e.g. DOC-2024-001" autocomplete="off"/>
+            </div>
+            <div class="field-error" id="err-doctor-id"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Registered Mobile / Email</label>
+            <div class="input-wrap">
+              <span class="input-icon">📧</span>
+              <input type="text" id="doctor-contact" placeholder="Mobile or email address"/>
+            </div>
+            <div class="field-error" id="err-doctor-contact"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="doctor-password" placeholder="Enter your password"/>
+              <button type="button" class="eye-btn" onclick="togglePass('doctor-password', this)">👁</button>
+            </div>
+            <div class="field-error" id="err-doctor-password"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Specialisation</label>
+            <div class="input-wrap">
+              <span class="input-icon">🏥</span>
+              <select id="doctor-spec">
+                <option value="">Select your department</option>
+                <option>Cardiologist</option>
+                <option>Neurologist</option>
+                <option>Orthopaedic</option>
+                <option>Pulmonologist</option>
+                <option>General Physician</option>
+                <option>Paediatrician</option>
+                <option>Emergency Medicine</option>
+                <option>Radiologist</option>
+              </select>
+            </div>
+            <div class="field-error" id="err-doctor-spec"></div>
+          </div>
+
+          <div class="form-row">
+            <label class="remember-label">
+              <input type="checkbox" id="remember"/> Remember this device
+            </label>
+            <a href="#" class="forgot-link" onclick="switchTab('forgot'); return false;">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="submit-btn" id="login-btn">
+            <span id="login-btn-text">Login to Dashboard</span>
+            <span id="login-spinner" class="spinner hidden"></span>
+          </button>
+
+          <div class="divider"><span>or use OTP login</span></div>
+
+          <button type="button" class="otp-btn" onclick="openOTPFlow()">
+            📱 Send OTP to Registered Mobile
+          </button>
+
+        </form>
+
+        <!-- OTP FORM -->
+        <form id="otp-form" class="hidden" onsubmit="handleOTP(event)">
+          <div class="otp-header">
+            <button type="button" class="back-otp" onclick="backFromOTP()">← Back</button>
+            <p>OTP sent to <strong id="otp-num-display"></strong></p>
+          </div>
+          <div class="form-group" style="text-align:center">
+            <label>Enter 6-digit OTP</label>
+            <div class="otp-boxes">
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp0"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp1"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp2"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp3"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp4"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp5"/>
+            </div>
+            <div class="field-error" id="err-otp"></div>
+          </div>
+          <div class="resend-row">
+            <span id="resend-timer">Resend in <strong id="countdown">30</strong>s</span>
+            <button type="button" class="resend-btn hidden" id="resend-btn" onclick="resendOTP()">Resend OTP</button>
+          </div>
+          <button type="submit" class="submit-btn">Verify &amp; Login</button>
+        </form>
+
+        <!-- FORGOT PASSWORD FORM -->
+        <form id="forgot-form" class="hidden" onsubmit="handleForgot(event)">
+          <div class="forgot-info">
+            <div class="forgot-icon">🔑</div>
+            <p>Enter your Doctor ID and registered mobile to reset your password.</p>
+          </div>
+          <div class="form-group">
+            <label>Doctor ID</label>
+            <div class="input-wrap">
+              <span class="input-icon">🪪</span>
+              <input type="text" id="forgot-id" placeholder="DOC-2024-001"/>
+            </div>
+            <div class="field-error" id="err-forgot-id"></div>
+          </div>
+          <div class="form-group">
+            <label>Registered Mobile</label>
+            <div class="input-wrap">
+              <span class="input-icon">📞</span>
+              <input type="tel" id="forgot-mobile" placeholder="+91 98765 43210"/>
+            </div>
+            <div class="field-error" id="err-forgot-mobile"></div>
+          </div>
+          <button type="submit" class="submit-btn">Send Reset Link</button>
+          <button type="button" class="otp-btn" style="margin-top:10px" onclick="switchTab('login')">← Back to Login</button>
+        </form>
+
+        <!-- SUCCESS MESSAGE -->
+        <div id="success-msg" class="hidden">
+          <div class="success-box">
+            <div class="success-icon">✅</div>
+            <div class="success-title">Login Successful!</div>
+            <div class="success-sub">Welcome, Doctor. Loading your dashboard...</div>
+            <div class="live-status">
+              <div class="live-dot"></div>
+              <span id="live-text">Connecting to patient alert system...</span>
+            </div>
+            <div class="success-bar">
+              <div class="success-bar-fill" id="redirect-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORGOT SUCCESS -->
+        <div id="forgot-success" class="hidden">
+          <div class="success-box">
+            <div class="success-icon">📨</div>
+            <div class="success-title">Reset Link Sent!</div>
+            <div class="success-sub">Check your registered mobile for the password reset OTP.</div>
+            <button class="submit-btn" style="margin-top:20px" onclick="switchTab('login')">← Back to Login</button>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          Patient login? <a href="patient-login.html" class="forgot-link">Patient Login →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL — INFO -->
+    <div class="right-panel">
+      <div class="right-content">
+
+        <div class="right-tag">Doctor Dashboard</div>
+        <h1>Real-time patient<br/><span>alerts, powered</span><br/>by AI</h1>
+        <p>Login to see incoming patient pre-diagnosis data, live GPS location, severity score and AI-recommended specialist — all before the patient arrives.</p>
+
+        <div class="dashboard-preview">
+          <div class="preview-header">
+            <div class="preview-dot red"></div>
+            <div class="preview-dot amber"></div>
+            <div class="preview-dot green"></div>
+            <span class="preview-title">Live Dashboard Preview</span>
+          </div>
+          <div class="preview-body">
+            <div class="alert-card critical">
+              <div class="alert-top">
+                <span class="alert-name">Ravi Kumar</span>
+                <span class="sev-badge sev-critical">CRITICAL</span>
+              </div>
+              <div class="alert-disease">Acute Coronary Syndrome</div>
+              <div class="alert-meta">Cardiologist · ETA 8 min · GPS Live</div>
+            </div>
+            <div class="alert-card high">
+              <div class="alert-top">
+                <span class="alert-name">Priya Sharma</span>
+                <span class="sev-badge sev-high">HIGH</span>
+              </div>
+              <div class="alert-disease">Severe Migraine + Vomiting</div>
+              <div class="alert-meta">Neurologist · ETA 14 min · GPS Live</div>
+            </div>
+            <div class="alert-card medium">
+              <div class="alert-top">
+                <span class="alert-name">Amit Verma</span>
+                <span class="sev-badge sev-medium">MODERATE</span>
+              </div>
+              <div class="alert-disease">Viral Fever 103°F</div>
+              <div class="alert-meta">General · ETA 22 min · GPS Live</div>
+            </div>
+          </div>
+          <div class="preview-footer">
+            <span class="live-indicator">
+              <span class="live-blink"></span>
+              3 active alerts · AI engine online
+            </span>
+          </div>
+        </div>
+
+        <div class="right-stats">
+          <div class="rs-item">
+            <div class="rs-num">247</div>
+            <div class="rs-label">Patients today</div>
+          </div>
+          <div class="rs-divider"></div>
+          <div class="rs-item">
+            <div class="rs-num">98.4%</div>
+            <div class="rs-label">AI accuracy</div>
+          </div>
+          <div class="rs-divider"></div>
+          <div class="rs-item">
+            <div class="rs-num">&lt;2s</div>
+            <div class="rs-label">Alert time</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+<script src="auth.js"></script>
+<script src="doctor-login.js"></script>
+</body>
+</html>

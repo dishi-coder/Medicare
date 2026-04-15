@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Dashboard — MediCare Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="patient-dashboard.css"/>
+</head>
+<body>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">Medi<span>Care</span></div>
+    <div class="sidebar-patient">
+      <div class="patient-avatar">RK</div>
+      <div>
+        <div class="patient-name">Ravi Kumar</div>
+        <div class="patient-id">ID: PAT-2024-001</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" onclick="showSection('overview',this)">
+        <span class="nav-icon">🏠</span> Overview
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('symptoms',this)">
+        <span class="nav-icon">🩺</span> Send Symptoms
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('ai-result',this)">
+        <span class="nav-icon">🧠</span> AI Results
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('reports',this)">
+        <span class="nav-icon">📋</span> My Reports
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('location',this)">
+        <span class="nav-icon">📍</span> Live Location
+      </a>
+      <a href="#" class="nav-item" onclick="showSection('alerts',this)">
+        <span class="nav-icon">🔔</span> Alerts
+        <span class="nav-badge">3</span>
+      </a>
+    </nav>
+    <a href="index.html" class="sidebar-logout">← Logout</a>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <div>
+          <div class="topbar-title" id="page-title">Overview</div>
+          <div class="topbar-sub">Welcome back, Ravi Kumar</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="live-chip">
+          <div class="live-dot"></div>
+          AI System Online
+        </div>
+        <div class="emergency-btn" onclick="triggerEmergency()">🚨 Emergency</div>
+        <div class="topbar-avatar">RK</div>
+      </div>
+    </header>
+
+    <!-- ══ SECTION: OVERVIEW ══ -->
+    <section class="section active" id="sec-overview">
+
+      <!-- STAT CARDS -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">🧠</div>
+          <div class="stat-info">
+            <div class="stat-label">Last AI Prediction</div>
+            <div class="stat-value">Viral Fever</div>
+            <div class="stat-meta">2 hours ago</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber">⚠️</div>
+          <div class="stat-info">
+            <div class="stat-label">Severity Level</div>
+            <div class="stat-value" style="color:#f59e0b">Moderate</div>
+            <div class="stat-meta">Score: 54 / 100</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">📋</div>
+          <div class="stat-info">
+            <div class="stat-label">Total Reports</div>
+            <div class="stat-value">8 reports</div>
+            <div class="stat-meta">Last: 3 days ago</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon teal">📍</div>
+          <div class="stat-info">
+            <div class="stat-label">Location Status</div>
+            <div class="stat-value" style="color:#2dd4bf">Sharing</div>
+            <div class="stat-meta">Hospital notified</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI RESULT + SEVERITY -->
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Latest AI Diagnosis</div>
+          <div class="diagnosis-name">Viral Fever</div>
+          <div class="diagnosis-sub">Recommended: General Physician</div>
+          <div class="sev-bar-wrap">
+            <div class="sev-bar-label">
+              <span>Severity</span>
+              <span class="sev-text moderate">Moderate — 54</span>
+            </div>
+            <div class="sev-track">
+              <div class="sev-fill moderate" style="width:54%"></div>
+            </div>
+            <div class="sev-ticks">
+              <span>Low</span><span>Moderate</span><span>High</span><span>Critical</span>
+            </div>
+          </div>
+          <div class="conditions-list">
+            <div class="condition-row top">
+              <span class="condition-name">Viral Fever</span>
+              <div class="prob-bar"><div class="prob-fill" style="width:72%"></div></div>
+              <span class="prob-pct">72%</span>
+            </div>
+            <div class="condition-row">
+              <span class="condition-name">Dengue (early)</span>
+              <div class="prob-bar"><div class="prob-fill" style="width:18%"></div></div>
+              <span class="prob-pct">18%</span>
+            </div>
+            <div class="condition-row">
+              <span class="condition-name">Malaria</span>
+              <div class="prob-bar"><div class="prob-fill" style="width:10%"></div></div>
+              <span class="prob-pct">10%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Quick Actions</div>
+          <div class="quick-btns">
+            <button class="qbtn blue" onclick="showSection('symptoms', document.querySelector('[onclick*=symptoms]'))">🩺 Send New Symptoms</button>
+            <button class="qbtn teal" onclick="showSection('location', document.querySelector('[onclick*=location]'))">📍 Share Live Location</button>
+            <button class="qbtn amber" onclick="showSection('reports', document.querySelector('[onclick*=reports]'))">📋 View My Reports</button>
+            <button class="qbtn red" onclick="triggerEmergency()">🚨 Emergency Alert</button>
+          </div>
+          <div class="card-title" style="margin-top:20px">Recent Activity</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-dot blue"></div>
+              <div>
+                <div class="activity-text">AI diagnosis completed — Viral Fever</div>
+                <div class="activity-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot green"></div>
+              <div>
+                <div class="activity-text">Location shared with hospital</div>
+                <div class="activity-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot amber"></div>
+              <div>
+                <div class="activity-text">Telegram alert sent to family</div>
+                <div class="activity-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot gray"></div>
+              <div>
+                <div class="activity-text">Lab report uploaded</div>
+                <div class="activity-time">3 days ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══ SECTION: SEND SYMPTOMS ══ -->
+    <section class="section" id="sec-symptoms">
+      <div class="card" style="max-width:700px;margin:0 auto">
+        <div class="card-title">Send Symptoms to Hospital AI</div>
+        <p class="card-desc">Select your symptoms below. Our AI will predict the disease and alert the hospital instantly.</p>
+
+        <div class="symptom-groups" id="symptom-groups">
+
+          <div class="symptom-group-label">Head & Neurological</div>
+          <div class="symptom-grid">
+            <label class="symptom-chip"><input type="checkbox" value="Severe headache"/> Severe headache</label>
+            <label class="symptom-chip"><input type="checkbox" value="Dizziness"/> Dizziness</label>
+            <label class="symptom-chip"><input type="checkbox" value="Confusion"/> Confusion</label>
+            <label class="symptom-chip"><input type="checkbox" value="Blurred vision"/> Blurred vision</label>
+          </div>
+
+          <div class="symptom-group-label">Chest & Heart</div>
+          <div class="symptom-grid">
+            <label class="symptom-chip"><input type="checkbox" value="Chest pain"/> Chest pain</label>
+            <label class="symptom-chip"><input type="checkbox" value="Shortness of breath"/> Shortness of breath</label>
+            <label class="symptom-chip"><input type="checkbox" value="Rapid heartbeat"/> Rapid heartbeat</label>
+            <label class="symptom-chip"><input type="checkbox" value="Palpitations"/> Palpitations</label>
+          </div>
+
+          <div class="symptom-group-label">Fever & Infection</div>
+          <div class="symptom-grid">
+            <label class="symptom-chip"><input type="checkbox" value="High fever"/> High fever</label>
+            <label class="symptom-chip"><input type="checkbox" value="Chills"/> Chills</label>
+            <label class="symptom-chip"><input type="checkbox" value="Body ache"/> Body ache</label>
+            <label class="symptom-chip"><input type="checkbox" value="Sore throat"/> Sore throat</label>
+            <label class="symptom-chip"><input type="checkbox" value="Cough"/> Cough</label>
+            <label class="symptom-chip"><input type="checkbox" value="Runny nose"/> Runny nose</label>
+          </div>
+
+          <div class="symptom-group-label">Digestive</div>
+          <div class="symptom-grid">
+            <label class="symptom-chip"><input type="checkbox" value="Nausea"/> Nausea</label>
+            <label class="symptom-chip"><input type="checkbox" value="Vomiting"/> Vomiting</label>
+            <label class="symptom-chip"><input type="checkbox" value="Abdominal pain"/> Abdominal pain</label>
+            <label class="symptom-chip"><input type="checkbox" value="Diarrhea"/> Diarrhea</label>
+          </div>
+
+        </div>
+
+        <div class="selected-count" id="selected-count">0 symptoms selected</div>
+        <button class="submit-btn-dash" id="analyze-btn" onclick="analyzeSymptoms()">
+          <span id="analyze-text">⚡ Analyze with AI</span>
+          <span id="analyze-spin" class="spinner hidden"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ══ SECTION: AI RESULTS ══ -->
+    <section class="section" id="sec-ai-result">
+      <div class="card" style="max-width:700px;margin:0 auto">
+        <div class="card-title">AI Prediction Results</div>
+        <div id="ai-result-body">
+          <div class="empty-state">
+            <div class="empty-icon">🧠</div>
+            <div class="empty-text">No prediction yet. Go to Send Symptoms and analyze first.</div>
+            <button class="submit-btn-dash" style="width:auto;padding:10px 24px;margin-top:16px" onclick="showSection('symptoms',document.querySelector('[onclick*=symptoms]'))">Go to Symptoms →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SECTION: REPORTS ══ -->
+    <section class="section" id="sec-reports">
+      <div class="card">
+        <div class="card-title">My Medical Reports</div>
+        <div class="reports-table">
+          <div class="report-header">
+            <span>Report Name</span>
+            <span>Date</span>
+            <span>Type</span>
+            <span>Status</span>
+            <span>Action</span>
+          </div>
+          <div class="report-row">
+            <span>Blood CBC Test</span>
+            <span>10 Apr 2025</span>
+            <span class="type-badge lab">Lab</span>
+            <span class="status-badge ready">Ready</span>
+            <button class="dl-btn">⬇ Download</button>
+          </div>
+          <div class="report-row">
+            <span>Chest X-Ray</span>
+            <span>08 Apr 2025</span>
+            <span class="type-badge radio">Radiology</span>
+            <span class="status-badge ready">Ready</span>
+            <button class="dl-btn">⬇ Download</button>
+          </div>
+          <div class="report-row">
+            <span>AI Diagnosis — Viral Fever</span>
+            <span>06 Apr 2025</span>
+            <span class="type-badge ai">AI</span>
+            <span class="status-badge ready">Ready</span>
+            <button class="dl-btn">⬇ Download</button>
+          </div>
+          <div class="report-row">
+            <span>ECG Report</span>
+            <span>01 Apr 2025</span>
+            <span class="type-badge lab">Lab</span>
+            <span class="status-badge pending">Pending</span>
+            <button class="dl-btn" disabled style="opacity:0.4">⬇ Download</button>
+          </div>
+          <div class="report-row">
+            <span>Urine Analysis</span>
+            <span>28 Mar 2025</span>
+            <span class="type-badge lab">Lab</span>
+            <span class="status-badge ready">Ready</span>
+            <button class="dl-btn">⬇ Download</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SECTION: LIVE LOCATION ══ -->
+    <section class="section" id="sec-location">
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Live GPS Location</div>
+          <div class="map-placeholder">
+            <div class="map-pin">📍</div>
+            <div class="map-text">Bhopal, Madhya Pradesh</div>
+            <div class="map-coords">23.2599° N, 77.4126° E</div>
+            <div class="map-accuracy">Accuracy: ±10 meters</div>
+          </div>
+          <div class="location-status" id="loc-status">
+            <div class="loc-dot sharing"></div>
+            <span id="loc-text">Location sharing — Active</span>
+          </div>
+          <div class="location-btns">
+            <button class="qbtn teal" onclick="toggleLocation()">📍 Stop Sharing</button>
+            <button class="qbtn blue" onclick="updateLocation()">🔄 Update Location</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Nearest Hospital</div>
+          <div class="hospital-info">
+            <div class="hosp-name">MediCare Hospital</div>
+            <div class="hosp-detail">📍 Near MP Nagar, Bhopal</div>
+            <div class="hosp-detail">📞 +91-755-2700-108</div>
+            <div class="hosp-detail">🚑 ETA: ~12 minutes</div>
+            <div class="hosp-detail" style="color:#4ade80">✅ Hospital notified — Doctor preparing</div>
+          </div>
+          <div class="card-title" style="margin-top:20px">Telegram Alert Status</div>
+          <div class="telegram-status">
+            <div class="tg-item sent">
+              <span>📱</span>
+              <div>
+                <div class="tg-title">Alert sent to family</div>
+                <div class="tg-sub">Viral Fever · Moderate · 2 hrs ago</div>
+              </div>
+            </div>
+            <div class="tg-item sent">
+              <span>🏥</span>
+              <div>
+                <div class="tg-title">Hospital dashboard notified</div>
+                <div class="tg-sub">Dr. Sunita Mehta — General Physician</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SECTION: ALERTS ══ -->
+    <section class="section" id="sec-alerts">
+      <div class="card">
+        <div class="card-title">My Alerts & Notifications</div>
+        <div class="alert-list">
+          <div class="alert-item critical">
+            <div class="alert-dot red"></div>
+            <div class="alert-body">
+              <div class="alert-title">AI detected high severity — Chest pain reported</div>
+              <div class="alert-time">Today, 10:42 AM</div>
+            </div>
+            <span class="alert-badge critical-b">Critical</span>
+          </div>
+          <div class="alert-item warning">
+            <div class="alert-dot amber"></div>
+            <div class="alert-body">
+              <div class="alert-title">Telegram alert sent to your family</div>
+              <div class="alert-time">Today, 10:43 AM</div>
+            </div>
+            <span class="alert-badge warning-b">Sent</span>
+          </div>
+          <div class="alert-item info">
+            <div class="alert-dot blue"></div>
+            <div class="alert-body">
+              <div class="alert-title">Doctor assigned: Dr. Sunita Mehta</div>
+              <div class="alert-time">Today, 10:44 AM</div>
+            </div>
+            <span class="alert-badge info-b">Assigned</span>
+          </div>
+          <div class="alert-item success">
+            <div class="alert-dot green"></div>
+            <div class="alert-body">
+              <div class="alert-title">Lab report — Blood CBC ready to download</div>
+              <div class="alert-time">3 days ago</div>
+            </div>
+            <span class="alert-badge success-b">Ready</span>
+          </div>
+          <div class="alert-item success">
+            <div class="alert-dot green"></div>
+            <div class="alert-body">
+              <div class="alert-title">New AI diagnosis saved to your reports</div>
+              <div class="alert-time">3 days ago</div>
+            </div>
+            <span class="alert-badge success-b">Saved</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- EMERGENCY MODAL -->
+  <div class="modal-overlay hidden" id="emergency-modal">
+    <div class="modal">
+      <div class="modal-icon">🚨</div>
+      <div class="modal-title">Emergency Alert Sent!</div>
+      <div class="modal-sub">Hospital has been notified. Ambulance dispatched. Family alerted via Telegram.</div>
+      <div class="modal-detail">📞 Helpline: 108</div>
+      <button class="submit-btn-dash" onclick="closeModal()">OK · Close</button>
+    </div>
+  </div>
+
+  <script src="patient-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Login — MediCare Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="patient-login.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo">Medi<span>Care</span></a>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </nav>
+
+  <!-- EMERGENCY STRIP -->
+  <div class="emergency-strip">
+    <div class="pulse-dot"></div>
+    <span>24x7 Emergency —</span>
+    <strong>108 | +91-755-2700-108</strong>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="page-wrapper">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="left-content">
+        <div class="ai-badge">
+          <div class="ai-badge-dot"></div> 
+          AI-Powered · Real-time Alerts
+        </div>
+        <h1>Your health,<br/><span>our priority</span></h1>
+        <p>Login to send your symptoms, share your live location, and let our AI alert the hospital before you arrive.</p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">🧠</div>
+            <div>
+              <div class="feature-title">AI Pre-diagnosis</div>
+              <div class="feature-sub">Disease predicted in under 2 seconds</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📍</div>
+            <div>
+              <div class="feature-title">Live GPS Tracking</div>
+              <div class="feature-sub">Hospital knows you are on the way</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            <div>
+              <div class="feature-title">Family Alert</div>
+              <div class="feature-sub">Telegram notification sent instantly</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🚨</div>
+            <div>
+              <div class="feature-title">Emergency Ready</div>
+              <div class="feature-sub">Doctor prepared before your arrival</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-strip">
+          <div class="mini-stat"><span class="mini-num">50K+</span><span class="mini-label">Patients</span></div>
+          <div class="mini-divider"></div>
+          <div class="mini-stat"><span class="mini-num">98.4%</span><span class="mini-label">AI Accuracy</span></div>
+          <div class="mini-divider"></div>
+          <div class="mini-stat"><span class="mini-num">&lt;2s</span><span class="mini-label">Response</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL — LOGIN FORM -->
+    <div class="right-panel">
+      <div class="form-card">
+
+        <div class="form-header">
+          <div class="form-logo">Medi<span>Care</span></div>
+          <h2>Patient Login</h2>
+          <p>Welcome back! Enter your details to continue.</p>
+        </div>
+
+        <!-- TAB SWITCHER -->
+        <div class="tab-switcher">
+          <button class="tab active" id="tab-login" onclick="switchTab('login')">Login</button>
+          <button class="tab" id="tab-register" onclick="switchTab('register')">Register</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <div class="input-wrap">
+              <span class="input-icon">📞</span>
+              <input type="tel" id="login-mobile" placeholder="+91 98765 43210" maxlength="13"/>
+            </div>
+            <div class="field-error" id="err-login-mobile"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="login-password" placeholder="Enter your password"/>
+              <button type="button" class="eye-btn" onclick="togglePass('login-password', this)">👁</button>
+            </div>
+            <div class="field-error" id="err-login-password"></div>
+          </div>
+
+          <div class="form-row">
+            <label class="remember-label">
+              <input type="checkbox" id="remember"/> Remember me
+            </label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="submit-btn" id="login-btn">
+            <span id="login-btn-text">Login to Account</span>
+            <span id="login-spinner" class="spinner hidden"></span>
+          </button>
+
+          <div class="divider"><span>or login with OTP</span></div>
+
+          <button type="button" class="otp-btn" onclick="switchToOTP()">
+            📱 Send OTP to Mobile
+          </button>
+        </form>
+
+        <!-- OTP FORM (hidden by default) -->
+        <form id="otp-form" class="hidden" onsubmit="handleOTP(event)">
+          <div class="otp-header">
+            <button type="button" class="back-otp" onclick="backFromOTP()">← Back</button>
+            <p>OTP sent to <strong id="otp-mobile-display"></strong></p>
+          </div>
+          <div class="form-group">
+            <label>Enter 6-digit OTP</label>
+            <div class="otp-boxes">
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp0"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp1"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp2"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp3"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp4"/>
+              <input class="otp-box" maxlength="1" type="text" inputmode="numeric" id="otp5"/>
+            </div>
+            <div class="field-error" id="err-otp"></div>
+          </div>
+          <div class="resend-row">
+            <span id="resend-timer">Resend OTP in <strong id="countdown">30</strong>s</span>
+            <button type="button" class="resend-btn hidden" id="resend-btn" onclick="resendOTP()">Resend OTP</button>
+          </div>
+          <button type="submit" class="submit-btn">Verify OTP</button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="register-form" class="hidden" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label>Full Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="reg-name" placeholder="Ravi Kumar"/>
+            </div>
+            <div class="field-error" id="err-reg-name"></div>
+          </div>
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <div class="input-wrap">
+              <span class="input-icon">📞</span>
+              <input type="tel" id="reg-mobile" placeholder="+91 98765 43210" maxlength="13"/>
+            </div>
+            <div class="field-error" id="err-reg-mobile"></div>
+          </div>
+          <div class="form-row-half">
+            <div class="form-group">
+              <label>Age</label>
+              <div class="input-wrap">
+                <span class="input-icon">🎂</span>
+                <input type="number" id="reg-age" placeholder="25" min="1" max="120"/>
+              </div>
+              <div class="field-error" id="err-reg-age"></div>
+            </div>
+            <div class="form-group">
+              <label>Blood Group</label>
+              <div class="input-wrap">
+                <span class="input-icon">🩸</span>
+                <select id="reg-blood">
+                  <option value="">Select</option>
+                  <option>A+</option><option>A-</option>
+                  <option>B+</option><option>B-</option>
+                  <option>O+</option><option>O-</option>
+                  <option>AB+</option><option>AB-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="reg-password" placeholder="Min 8 characters"/>
+              <button type="button" class="eye-btn" onclick="togglePass('reg-password', this)">👁</button>
+            </div>
+            <div class="field-error" id="err-reg-password"></div>
+            <div class="password-strength" id="pwd-strength"></div>
+          </div>
+          <div class="form-group">
+            <label class="remember-label">
+              <input type="checkbox" id="reg-terms"/>
+              I agree to the <a href="#" class="forgot-link">Terms & Conditions</a>
+            </label>
+            <div class="field-error" id="err-reg-terms"></div>
+          </div>
+          
+          <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+
+        <!-- SUCCESS MESSAGE -->
+        <div id="success-msg" class="hidden">
+          <div class="success-box">
+            <div class="success-icon">✅</div>
+            <div class="success-title">Login Successful!</div>
+            <div class="success-sub">Redirecting to your dashboard...</div>
+            <div class="success-bar"><div class="success-bar-fill" id="redirect-bar"></div></div>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          Are you a doctor? <a href="doctor-login.html" class="forgot-link">Doctor Login →</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+<script src="patient-login.js"></script>
+</body>
+</html>

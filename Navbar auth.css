@@ -1,0 +1,71 @@
+/* ═══════════════════════════════════════════════
+   navbar-auth.css
+   Logged-in navbar profile styles
+   Add karo index.html ke <head> mein
+   ═══════════════════════════════════════════════ */
+
+/* Profile button in navbar */
+.nav-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 10px;
+  padding: 6px 14px 6px 8px;
+  transition: all 0.2s;
+}
+
+.nav-profile-btn:hover {
+  background: #dbeafe;
+  border-color: #2563eb;
+}
+
+/* Avatar circle */
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #0ea5e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* Name and role */
+.nav-profile-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.nav-profile-role {
+  font-size: 11px;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* Logout button */
+.btn-logout {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #fff;
+  border: 1.5px solid #fca5a5;
+  color: #dc2626;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: #fef2f2;
+  border-color: #dc2626;
+}
