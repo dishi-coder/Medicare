@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediCare – Track Patient</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- YOUR CSS FILE -->
+  <link rel="stylesheet" href="track patient.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Medi<span>Care</span></div>
+  <ul>
+    <li><a href="#">How it works</a></li>
+    <li><a href="#">Departments</a></li>
+    <li><a href="#">Doctors</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-btns">
+    <button class="btn-outline">Patient Login</button>
+    <button class="btn-primary">Doctor Login</button>
+  </div>
+</nav>
+
+<!-- EMERGENCY BANNER -->
+<div class="emergency-banner">
+  24x7 Emergency Helpline — <strong>108</strong> | +91-755-2700-108 — Ambulance response under 8 minutes
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="badge">
+    <span class="pulse-dot"></span>
+    Live GPS Tracking
+  </div>
+  <h1>Track Patient Location</h1>
+  <p>Real-time location sharing with hospital dashboard — Doctors are notified instantly</p>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-top">
+      <button class="location-btn" id="locBtn" onclick="startTracking()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+          <path d="M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+        </svg>
+        Fetch My Location
+      </button>
+    </div>
+
+    <div class="status-card" id="statusCard">
+      <div class="status-label" id="statusLabel">Status</div>
+      <div class="status-value" id="statusValue">—</div>
+    </div>
+
+    <div class="coords-grid" id="coordsGrid">
+      <div class="coord-box">
+        <label>Latitude</label>
+        <span id="latVal">—</span>
+      </div>
+      <div class="coord-box">
+        <label>Longitude</label>
+        <span id="lngVal">—</span>
+      </div>
+    </div>
+
+    <div class="accuracy-row" id="accuracyRow">
+      ⚡ Accuracy: <strong id="accVal">—</strong>
+    </div>
+
+    <div class="live-info" id="liveInfo">
+      <div class="live-dot"></div>
+      <div>
+        <p>Live Tracking Active</p>
+        <span id="updateCount">Waiting for updates...</span>
+      </div>
+    </div>
+
+    <div class="action-btns" id="actionBtns">
+      <button class="btn-sm secondary" onclick="centerMap()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+        </svg>
+        Center
+      </button>
+      <button class="btn-sm secondary" onclick="shareLocation()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        Share
+      </button>
+      <button class="btn-sm danger" onclick="stopTracking()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+        </svg>
+        Stop
+      </button>
+    </div>
+
+    <div class="history-section">
+      <h3>Location Log</h3>
+      <div id="historyLog">
+        <div class="history-item">
+          <div class="history-icon">
+            <svg width="14" height="14" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <p>Awaiting first fix</p>
+            <span>Press the button above to start</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP AREA -->
+  <div class="map-wrapper">
+    <div class="map-placeholder" id="mapPlaceholder">
+      <div class="map-placeholder-icon">
+        <svg width="32" height="32" fill="none" stroke="#3b82f6" stroke-width="1.8" viewBox="0 0 24 24">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <h3>Map will appear here</h3>
+      <p>Click <strong>"Fetch My Location"</strong> to open the live map with your current GPS position</p>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="map-controls" id="mapControls" style="display:none;">
+      <button class="map-ctrl-btn" onclick="centerMap()" title="Center on location">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+        </svg>
+      </button>
+      <button class="map-ctrl-btn" onclick="toggleSatellite()" title="Toggle satellite" id="satBtn">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="speed-badge" id="speedBadge">
+      <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+      </svg>
+      <span id="speedVal">0 km/h</span>
+    </div>
+
+    <button class="emergency-float" onclick="callEmergency()">
+      🚨 Emergency — Call 108
+    </button>
+  </div>
+
+</div>
+
+<!-- BOTTOM FEATURE BAR -->
+<div class="feature-bar">
+  <div class="feature-item" onclick="goTo('symptoms')">
+    <div class="fi-icon">🩺</div>
+    <div>
+      <div class="fi-title">Send Symptoms</div>
+      <div class="fi-sub">AI pre-diagnosis in seconds</div>
+    </div>
+  </div>
+  <div class="feature-item active">
+    <div class="fi-icon">📍</div>
+    <div>
+      <div class="fi-title">Track Patient</div>
+      <div class="fi-sub">Live GPS location sharing</div>
+    </div>
+  </div>
+  <div class="feature-item" onclick="goTo('dashboard')">
+    <div class="fi-icon">🏥</div>
+    <div>
+      <div class="fi-title">Hospital Dashboard</div>
+      <div class="fi-sub">Real-time patient data</div>
+    </div>
+  </div>
+  <div class="feature-item" onclick="callEmergency()">
+    <div class="fi-icon">🚨</div>
+    <div>
+      <div class="fi-title">Emergency</div>
+      <div class="fi-sub">Call 108 · instant alert</div>
+    </div>
+  </div>
+</div>
+
+<!-- Leaflet JS — load BEFORE your JS file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- YOUR JS FILE -->
+<script src="track.js"></script>
+
+</body>
+</html>

@@ -82,10 +82,11 @@ if (loginForm) {
     }
 
     if(email === storedUser.email && password === storedUser.password){
-      alert("Login Successful ✅");
+      alert("Login Successful ");
+       localStorage.setItem("isLoggedIn", "true");
       window.location.href = "index.html";
     } else {
-      alert("Invalid credentials ❌");
+      alert("Invalid credentials ");
     }
   });
 }
@@ -120,3 +121,15 @@ if (dashboardHero) {
     }
   });
 }
+// Track Patient click
+const trackBtn = document.getElementById('trackPatient');
+
+if (trackBtn) {
+  trackBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = "track-patient.html";
+  });
+}
+window.onload = () => {
+  startTracking();
+};
